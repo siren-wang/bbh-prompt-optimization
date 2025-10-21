@@ -1,0 +1,76 @@
+version: '3.8'
+
+services:
+  # Data preparation
+  data-prep:
+    build: .
+    command: python src/data_preparation.py
+    volumes:
+      - ./data:/app/data
+      - ./results:/app/results
+    profiles:
+      - setup
+
+  # Baseline evaluation
+  baseline:
+    build: .
+    command: python src/baseline_evaluation.py
+    env_file: .env
+    environment:
+      - USE_SAMPLE=true
+    volumes:
+      - ./data:/app/data
+      - ./results:/app/results
+    profiles:
+      - eval
+
+  # Improved prompt evaluation
+  improved:
+    build: .
+    command: python src/improved_prompt_evaluation.py
+    env_file: .env
+    environment:
+      - USE_SAMPLE=true
+    volumes:
+      - ./data:/app/data
+      - ./results:/app/results
+    profiles:
+      - eval
+
+  # Chain-of-Thought evaluation
+  cot:
+    build: .
+    command: python src/cot_evaluation.py
+    env_file: .env
+    environment:
+      - USE_SAMPLE=true
+    volumes:
+      - ./data:/app/data
+      - ./results:/app/results
+    profiles:
+      - eval
+
+  # OPRO optimization
+  opro:
+    build: .
+    command: python src/opro_optimization.py
+    env_file: .env
+    environment:
+      - USE_SAMPLE=true
+    volumes:
+      - ./data:/app/data
+      - ./results:/app/results
+    profiles:
+      - opro
+
+  # Analysis
+  analysis:
+    build: .
+    command: python src/analyze_results.py
+    volumes:
+      - ./results:/app/results
+    stdin_open: true
+    tty: true
+    profiles:
+      - analysis
+      
