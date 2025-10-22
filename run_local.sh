@@ -34,24 +34,24 @@ echo "📊 Step 1: Preparing sample datasets..."
 python3 src/data_preparation.py
 echo ""
 
-# Step 2: Baseline Evaluation
-echo "🔬 Step 2: Running baseline evaluation..."
-python3 src/baseline_evaluation.py
-echo ""
+# # Step 2: Baseline Evaluation
+# echo "🔬 Step 2: Running baseline evaluation..."
+# proxychains4 python3 src/baseline_evaluation.py
+# echo ""
 
 # Step 3: Improved Prompt Evaluation
-echo "🔬 Step 3: Running improved prompt evaluation..."
-python3 src/improved_prompt_evaluation.py
-echo ""
+# echo "🔬 Step 3: Running improved prompt evaluation..."
+# proxychains4 python3 src/improved_prompt_evaluation.py
+# echo ""
 
 # Step 4: Chain-of-Thought Evaluation
 echo "🔬 Step 4: Running Chain-of-Thought evaluation..."
-python3 src/cot_evaluation.py
+proxychains4 python3 src/cot_evaluation.py
 echo ""
 
 # Step 5: OPRO Optimization
 echo "🤖 Step 5: Running OPRO optimization..."
-python3 src/opro_optimization.py
+proxychains4 python3 src/opro_optimization.py
 echo ""
 
 # Step 6: Analysis

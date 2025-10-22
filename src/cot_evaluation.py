@@ -39,7 +39,9 @@ Let's think step by step to find the answer:
 1. First, identify the reference date mentioned
 2. Then, determine what operation is needed (add/subtract days)
 3. Perform the calculation carefully
-4. Format the final answer as MM/DD/YYYY
+4. Choose the option letter that matches
+
+Example answers: (A) or (B) or (C)
 
 A:""",
         
@@ -53,6 +55,8 @@ Let's think step by step to solve this:
 3. Build the complete ordering by combining all relationships
 4. Finally, determine which option correctly describes the arrangement
 
+Example answers: (A) or (B) or (C)
+
 A:""",
         
         'tracking_shuffled_objects_five_objects': """You are an expert at tracking object movements.
@@ -64,6 +68,8 @@ Let's think step by step to track the objects:
 2. Then, process each swap operation one by one
 3. Update positions after each swap
 4. Finally, determine the final position of the requested object
+
+Example answers: (A) or (B) or (C)
 
 A:"""
     }

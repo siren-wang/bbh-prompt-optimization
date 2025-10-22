@@ -42,12 +42,7 @@ def create_improved_prompt_template(task_name):
 
 Your task: Carefully analyze the given date-related question and compute the correct answer.
 
-Instructions:
-1. Read the question carefully and identify all date information
-2. Determine what calculation or reasoning is needed
-3. Think through the problem step by step
-4. Perform the calculation accurately
-5. Format your final answer in MM/DD/YYYY format
+Instruction: Read the question carefully, determine what to do, think through the problem, perform the calculation accurately, choose the correct option
 
 Q: {question}
 
@@ -58,12 +53,7 @@ A:""",
 
 Your task: Analyze the given statements about objects and their relationships, then determine the correct logical conclusion.
 
-Instructions:
-1. Read all statements carefully
-2. Identify the relationships between objects (e.g., "X is above Y", "Y is to the right of Z")
-3. Build a mental model or ordering of the objects based on these relationships
-4. Reason through which option correctly describes the final arrangement
-5. Select the answer choice that logically follows from the given statements
+Instruction: Read the question carefully, determine what to do, think through the problem, perform the calculation accurately, choose the correct option
 
 Q: {question}
 
@@ -74,12 +64,7 @@ A:""",
 
 Your task: Track how objects change positions through a series of swaps or movements.
 
-Instructions:
-1. Note the initial state (who has what object)
-2. Process each swap or movement operation one at a time
-3. Update your mental model after each operation
-4. Keep track of where each object is at every step
-5. Determine the final state after all operations
+Instruction: Read the question carefully, determine what to do, think through the problem, perform the calculation accurately, choose the correct option
 
 Q: {question}
 
@@ -96,13 +81,7 @@ A:"""
 
 Your task: Carefully analyze the given question and provide an accurate, well-reasoned answer.
 
-Instructions:
-1. Read the question thoroughly
-2. Identify the key information and what is being asked
-3. Think through the problem systematically
-4. Apply logical reasoning to reach the correct conclusion
-5. Provide a clear, precise answer
-
+Instruction: Read the question carefully, determine what to do, think through the problem, perform the calculation accurately, choose the correct option
 Q: {question}
 
 Reason through this problem carefully and provide your answer.

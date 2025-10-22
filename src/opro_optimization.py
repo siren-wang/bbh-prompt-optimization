@@ -25,7 +25,7 @@ def load_task_data(task_name, use_sample=False):
     with open(path, 'r') as f:
         return json.load(f)
 
-def split_train_eval(examples, train_size=20, eval_size=30, seed=42):
+def split_train_eval(examples, train_size=20, eval_size=20, seed=42):
     """
     Split dataset into training and evaluation sets
     Training set: Used for OPRO optimization
@@ -357,7 +357,7 @@ def main():
         train_examples, eval_examples = split_train_eval(
             examples,
             train_size=20,  # 20 for training (OPRO optimization)
-            eval_size=30,   # 30 for evaluation (final accuracy)
+            eval_size=20,   # 20 for evaluation (final accuracy)
             seed=42
         )
         

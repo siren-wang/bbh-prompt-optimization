@@ -1,0 +1,27 @@
+============================================================
+BIG-BENCH-HARD PROMPT ENGINEERING ANALYSIS
+============================================================
+
+Dataset: Sample (20 examples/task)
+Model: Gemini 1.5 Flash
+
+COMPARISON TABLE
+------------------------------------------------------------
+                                  Task BASELINE IMPROVED     COT OPRO
+                    Date Understanding   15.00%    5.00%   0.00%  N/A
+       Logical Deduction Three Objects   85.00%   70.00% 100.00%  N/A
+Tracking Shuffled Objects Five Objects   15.00%   10.00% 100.00%  N/A
+                               OVERALL   38.33%   28.33%  66.67%  N/A
+
+IMPROVEMENTS OVER BASELINE
+------------------------------------------------------------
+
+IMPROVED:
+  Accuracy: 28.33%
+  Absolute Improvement: -10.00%
+  Relative Improvement: -26.1%
+
+COT:
+  Accuracy: 66.67%
+  Absolute Improvement: +28.33%
+  Relative Improvement: +73.9%

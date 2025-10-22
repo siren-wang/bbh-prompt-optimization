@@ -94,7 +94,7 @@ def main():
     print("\n" + "="*60)
     print("BASELINE EVALUATION WITH PROPER SCORING")
     print("="*60)
-    print(f"Mode: {'SAMPLE (50 examples/task)' if USE_SAMPLE else 'FULL DATASET'}")
+    print(f"Mode: {'SAMPLE (20 examples/task)' if USE_SAMPLE else 'FULL DATASET'}")
     print(f"Model: Gemini 1.5 Flash")
     print(f"Tasks: {len(tasks)}")
     print(f"Scoring: Exact match with #### prefix parsing")

@@ -80,7 +80,7 @@ chmod +x run_all.sh
 ```
 
 This will:
-- Create sample datasets (50 examples each)
+- Create sample datasets (20 examples each)
 - Run baseline evaluation
 - Run improved prompt evaluation
 - Run Chain-of-Thought evaluation
@@ -286,7 +286,7 @@ docker-compose run --rm -e OPRO_TASK=date_understanding opro
 
 Edit `src/data_preparation.py`:
 ```python
-create_sample_dataset(task, sample_size=100)  # Increase from 50
+create_sample_dataset(task, sample_size=100)  # Increase from 20
 ```
 
 ### Use Different LLM
@@ -307,29 +307,3 @@ response = client.chat.completions.create(
     messages=[{"role": "user", "content": prompt}]
 )
 ```
-
-## 📚 References
-
-- [BIG-Bench-Hard Repository](https://github.com/suzgunmirac/BIG-Bench-Hard)
-- [Google OPRO Paper](https://arxiv.org/abs/2309.03409)
-- [Chain-of-Thought Prompting](https://arxiv.org/abs/2201.11903)
-- [Gemini API Documentation](https://ai.google.dev/docs)
-
-## 🤝 Contributing
-
-This is an assignment project, but feel free to:
-- Report issues
-- Suggest improvements
-- Share your results
-
-## 📄 License
-
-MIT License - feel free to use for educational purposes
-
-## 👥 Author
-
-[Your Name] - Generative AI Assignment
-
----
-
-**Happy Prompting! 🚀**
