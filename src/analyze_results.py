@@ -213,7 +213,7 @@ def main():
         f.write("BIG-BENCH-HARD PROMPT ENGINEERING ANALYSIS\n")
         f.write("="*60 + "\n\n")
         
-        f.write(f"Dataset: {'Sample (20 examples/task)' if use_sample else 'Full Dataset'}\n")
+        f.write(f"Dataset: {'Sample (50 examples/task)' if use_sample else 'Full Dataset'}\n")
         f.write(f"Model: Gemini 1.5 Flash\n\n")
         
         f.write("COMPARISON TABLE\n")

@@ -7,7 +7,7 @@ import json
 import random
 from pathlib import Path
 
-def create_sample_dataset(task_name, sample_size=20, seed=42):
+def create_sample_dataset(task_name, sample_size=50, seed=42):
     """
     Create small sample for prototyping
     
@@ -58,7 +58,7 @@ def main():
     print("=" * 60)
     
     for task in tasks:
-        create_sample_dataset(task, sample_size=3)
+        create_sample_dataset(task, sample_size=50)
     
     print("=" * 60)
     print("✅ Sample datasets created successfully!")
@@ -67,7 +67,7 @@ def main():
     print("├── [original task files]")
     print("└── sample/")
     for task in tasks:
-        print(f"    └── {task}_sample.json (20 examples)")
+        print(f"    └── {task}_sample.json (50 examples)")
 
 if __name__ == "__main__":
     main()

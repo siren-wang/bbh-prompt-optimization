@@ -45,9 +45,9 @@ echo ""
 # echo ""
 
 # Step 4: Chain-of-Thought Evaluation
-echo "🔬 Step 4: Running Chain-of-Thought evaluation..."
-proxychains4 python3 src/cot_evaluation.py
-echo ""
+# echo "🔬 Step 4: Running Chain-of-Thought evaluation..."
+# proxychains4 python3 src/cot_evaluation.py
+# echo ""
 
 # Step 5: OPRO Optimization
 echo "🤖 Step 5: Running OPRO optimization..."

@@ -25,7 +25,7 @@ def load_task_data(task_name, use_sample=False):
     with open(path, 'r') as f:
         return json.load(f)
 
-def split_train_eval(examples, train_size=20, eval_size=20, seed=42):
+def split_train_eval(examples, train_size=20, eval_size=30, seed=42):
     """
     Split dataset into training and evaluation sets
     Training set: Used for OPRO optimization
@@ -59,20 +59,20 @@ class OPROOptimizer:
         self.prompt_history = []
     
     def generate_initial_prompts(self, n=4):
-        """Generate initial set of prompts to test"""
+        """Generate initial set of prompts to test - FIXED for multiple choice with parentheses"""
         
         initial_prompts = [
-            # Very simple baseline
-            "Q: {question}\nA:",
+            # Simple - explicitly ask for option WITH PARENTHESES
+            "Q: {question}\n\nChoose the correct option. Format your answer with parentheses like (A) or (B) or (C).\nA:",
             
-            # With instruction
-            "Answer the following question carefully.\n\nQ: {question}\nA:",
+            # With instruction - emphasize format
+            "Read the question carefully. Select the correct option and write it with parentheses.\n\nQ: {question}\n\nYour answer (format: (A) or (B) or (C) etc.):\nA:",
             
-            # With role
-            "You are an expert problem solver.\n\nQ: {question}\nA:",
+            # With role - expert choosing from options with format
+            "You are an expert problem solver. Read the question and select the correct option.\n\nQ: {question}\n\nProvide your answer with parentheses, like (A) or (B) or (C):\nA:",
             
-            # With reasoning request
-            "Think carefully about this question and provide the correct answer.\n\nQ: {question}\nA:"
+            # With reasoning - think then choose with format
+            "Analyze the question carefully, then select the correct option.\n\nQ: {question}\n\nAnswer format: (A) or (B) or (C) etc.\nA:"
         ]
         
         return initial_prompts[:n]
@@ -87,11 +87,13 @@ class OPROOptimizer:
             sample_size: How many training examples to use (None = all)
         """
         
-        # Use subset of training data for faster optimization
+        # Use all training data or subset
         if sample_size and sample_size < len(self.train_examples):
             examples_to_use = random.sample(self.train_examples, sample_size)
         else:
             examples_to_use = self.train_examples
+        
+        print(f"    Evaluating on {len(examples_to_use)} training examples...")
         
         # Evaluate using scorer
         results = self.scorer.score_prompt(
@@ -99,8 +101,10 @@ class OPROOptimizer:
             examples=examples_to_use,
             use_semantic=False,
             verbose=False,  # No verbose during optimization
-            delay=0.1
+            delay=0.5  # Slightly longer delay for stability
         )
+        
+        print(f"    Result: {results['correct']}/{results['total']} correct")
         
         return results['accuracy']
     
@@ -221,14 +225,15 @@ PROMPT 4:
                 "Analyze carefully:\n\nQ: {question}\nA:"
             ][:n]
     
-    def optimize(self, n_iterations=5, prompts_per_iteration=4, train_sample_size=15):
+    def optimize(self, n_iterations=3, prompts_per_iteration=3, train_sample_size=None):
         """
         Run OPRO optimization loop on TRAINING set
+        Reduced iterations for small datasets
         
         Args:
-            n_iterations: Number of optimization iterations
-            prompts_per_iteration: Number of prompts to test per iteration
-            train_sample_size: Number of training examples per prompt evaluation
+            n_iterations: Number of optimization iterations (reduced to 3 for small datasets)
+            prompts_per_iteration: Number of prompts to test per iteration (reduced to 3)
+            train_sample_size: Number of training examples per prompt evaluation (None = all)
         """
         
         print(f"\n{'='*60}")
@@ -237,7 +242,7 @@ PROMPT 4:
         print(f"Training examples: {len(self.train_examples)}")
         print(f"Iterations: {n_iterations}")
         print(f"Prompts per iteration: {prompts_per_iteration}")
-        print(f"Training sample per prompt: {train_sample_size}")
+        print(f"Training sample per prompt: {train_sample_size or 'ALL'}")
         print(f"{'='*60}\n")
         
         # Start with initial prompts
@@ -248,8 +253,8 @@ PROMPT 4:
             
             # Evaluate current prompts on TRAINING set
             for i, prompt in enumerate(current_prompts):
-                print(f"\nTesting prompt {i+1}/{len(current_prompts)}...")
-                print(f"Prompt preview: {prompt[:100]}...")
+                print(f"\n  Testing prompt {i+1}/{len(current_prompts)}...")
+                print(f"  Prompt: {prompt[:80]}...")
                 
                 score = self.evaluate_prompt_on_training(
                     prompt, 
@@ -262,11 +267,11 @@ PROMPT 4:
                     'iteration': iteration
                 })
                 
-                print(f"✓ Training Accuracy: {score:.1%}")
+                print(f"  ✓ Training Accuracy: {score:.1%}")
             
             # Generate new prompts for next iteration (except last)
             if iteration < n_iterations - 1:
-                print(f"\n🔄 Generating new prompts for iteration {iteration + 2}...")
+                print(f"\n  🔄 Generating new prompts for iteration {iteration + 2}...")
                 meta_prompt = self.create_meta_prompt()
                 current_prompts = self.generate_new_prompts(
                     meta_prompt,
@@ -357,7 +362,7 @@ def main():
         train_examples, eval_examples = split_train_eval(
             examples,
             train_size=20,  # 20 for training (OPRO optimization)
-            eval_size=20,   # 20 for evaluation (final accuracy)
+            eval_size=30,   # 30 for evaluation (final accuracy)
             seed=42
         )
         
