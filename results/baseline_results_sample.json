@@ -1,0 +1,20 @@
+{
+  "date_understanding": {
+    "accuracy": 0.16,
+    "correct": 8,
+    "total": 50,
+    "prompt_template": "Q: {question}\nA:"
+  },
+  "logical_deduction_three_objects": {
+    "accuracy": 0.86,
+    "correct": 43,
+    "total": 50,
+    "prompt_template": "Q: {question}\nA:"
+  },
+  "tracking_shuffled_objects_five_objects": {
+    "accuracy": 0.8,
+    "correct": 40,
+    "total": 50,
+    "prompt_template": "Q: {question}\nA:"
+  }
+}

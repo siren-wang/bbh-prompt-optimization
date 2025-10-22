@@ -1,0 +1,5 @@
+Task,BASELINE,IMPROVED,COT,OPRO
+Date Understanding,16.00%,20.00%,88.00%,88.00%
+Logical Deduction Three Objects,86.00%,86.00%,92.00%,100.00%
+Tracking Shuffled Objects Five Objects,80.00%,86.00%,86.00%,100.00%
+OVERALL,60.67%,64.00%,88.67%,95.56%

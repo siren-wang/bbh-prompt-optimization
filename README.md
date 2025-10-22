@@ -4,7 +4,7 @@ A systematic evaluation of prompt engineering techniques on BIG-Bench-Hard reaso
 
 ---
 
-## 📊 Results
+## Results
 
 ### Performance Comparison
 
@@ -12,14 +12,15 @@ Experiments conducted with 50 examples per task (3 tasks total = 150 examples):
 
 | Method | Date Understanding | Logical Deduction | Object Tracking | **Overall** |
 |--------|-------------------|-------------------|-----------------|-------------|
-| **Baseline** | 15% | 85% | 15% | **38%** |
-| **Improved Prompts** | 5% | 70% | 10% | **28%** |
-| **Chain-of-Thought** | 0% | 100% | 100% | **67%** |
-| **OPRO** | 45% | 90% | 80% | **72%** |
+| **Baseline** | 16% | 86% | 80% | **61%** |
+| **Improved Prompts** | 20% | 86% | 86% | **64%** |
+| **Chain-of-Thought** | 88% | 92% | 86% | **89%** |
+| **OPRO** | 88% | 100% | 100% | **96%** |
+
 
 ---
 
-## 🔬 Project Overview
+## Project Overview
 
 This project implements and compares four prompt engineering approaches on BIG-Bench-Hard tasks:
 
@@ -42,96 +43,56 @@ This project implements and compares four prompt engineering approaches on BIG-B
 ---
 
 ## How to Reproduce
-Prerequisites
+### Prerequisites
 
-Python 3.9+
-Google Gemini API key
-
-### Step 1: Clone and Setup
+- Python 3.9+
+- Google Gemini API key (or OpenAI API key)
+### Quick Start
 
 ```bash
-# Clone repository
+# 1. Clone repository
 git clone https://github.com/YOUR_USERNAME/bbh-prompt-optimization.git
 cd bbh-prompt-optimization
 
-# Install dependencies
+# 2. Install dependencies
 pip install -r requirements.txt
-```
 
-### Step 2: Configure API Key
-
-```bash
-# Copy environment template
+# 3. Setup API key
 cp .env.example .env
+# Edit .env and add: GOOGLE_API_KEY=your_key_here
 
-# Edit .env and add your API key
-# GOOGLE_API_KEY=your_key_here
+# 4. Download BBH data files
+# Download these files from https://github.com/suzgunmirac/BIG-Bench-Hard/tree/main/bbh
+# Place in data/ folder:
+#   - date_understanding.json
+#   - logical_deduction_three_objects.json
+#   - tracking_shuffled_objects_five_objects.json
+
+# 5. Run complete pipeline
+chmod +x run_local.sh
+./run_local.sh
 ```
 
-### Step 3: Prepare Data
+That's it! The script will:
+1. Create sample datasets (50 examples per task)
+2. Run baseline evaluation
+3. Run improved prompt evaluation
+4. Run Chain-of-Thought evaluation
+5. Run OPRO optimization
+6. Generate analysis and comparison
 
-Download BIG-Bench-Hard data files and place in `data/` folder:
-- `date_understanding.json`
-- `logical_deduction_three_objects.json`
-- `tracking_shuffled_objects_five_objects.json`
 
-Source: https://github.com/suzgunmirac/BIG-Bench-Hard/tree/main/bbh
+### Manual Step-by-Step (Optional)
+
+If you prefer to run each experiment separately:
 
 ```bash
-# Create sample datasets (50 examples each)
 python3 src/data_preparation.py
-```
-
-### Step 4: Run Experiments
-
-**Option A: Run Complete Pipeline**
-
-```bash
-# If in China, use proxychains4
-proxychains4 python3 src/baseline_evaluation.py
-proxychains4 python3 src/improved_prompt_evaluation.py
-proxychains4 python3 src/cot_evaluation.py
-proxychains4 python3 src/opro_optimization.py
-
-# Analyze results
-python3 src/analyze_results.py
-```
-
-**Option B: Run Individual Experiments**
-
-```bash
-# Baseline
 python3 src/baseline_evaluation.py
-
-# Improved prompts
 python3 src/improved_prompt_evaluation.py
-
-# Chain-of-Thought
 python3 src/cot_evaluation.py
-
-# OPRO (takes longer)
 python3 src/opro_optimization.py
-
-# Analysis
 echo "sample" | python3 src/analyze_results.py
-```
-
-### Step 5: View Results
-
-Results are saved in the `results/` directory:
-
-```bash
-# View comparison table
-cat results/comparison_sample.csv
-
-# View full analysis
-cat results/analysis_report_sample.txt
-
-# View individual results
-cat results/baseline_results_sample.json
-cat results/improved_results_sample.json
-cat results/cot_results_sample.json
-cat results/opro_results_sample.json
 ```
 
 ---
@@ -168,7 +129,7 @@ bbh-prompt-optimization/
 
 ---
 
-## 🔑 Key Implementation Details
+## Key Implementation Details
 
 ### Scoring Function (`scoring.py`)
 
@@ -199,8 +160,6 @@ result = scorer.score_single_example(prompt_template, example)
 **Pure CoT only:**
 - ✅ "Let's think step by step" instruction
 - ✅ Step-by-step reasoning structure
-- ❌ NO few-shot examples
-- ❌ NO Tree-of-Thoughts, Meta prompting, or Self-consistency
 
 ### OPRO (Automated Optimization)
 

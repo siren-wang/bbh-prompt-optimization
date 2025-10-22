@@ -1,0 +1,23 @@
+{
+  "date_understanding": {
+    "best_prompt": "Read the question carefully. Select the correct option and write it with parentheses.\n\nQ: {question}\n\nYour answer (format: (A) or (B) or (C) etc.):\nA:",
+    "training_accuracy": 0.9,
+    "final_accuracy": 0.88,
+    "correct": 26,
+    "total": 30
+  },
+  "logical_deduction_three_objects": {
+    "best_prompt": "Q: {question}\n\nChoose the correct option. Format your answer with parentheses like (A) or (B) or (C).\nA:",
+    "training_accuracy": 1.0,
+    "final_accuracy": 1.0,
+    "correct": 30,
+    "total": 30
+  },
+  "tracking_shuffled_objects_five_objects": {
+    "best_prompt": "Q: {question}\n\nChoose the correct option. Format your answer with parentheses like (A) or (B) or (C).\nA:",
+    "training_accuracy": 1.0,
+    "final_accuracy": 1.0,
+    "correct": 30,
+    "total": 30
+  }
+}

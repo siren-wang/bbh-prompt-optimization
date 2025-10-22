@@ -1,0 +1,59 @@
+============================================================
+BIG-BENCH-HARD PROMPT ENGINEERING ANALYSIS
+============================================================
+
+Dataset: Sample (50 examples/task)
+Model: Gemini 1.5 Flash
+
+COMPARISON TABLE
+------------------------------------------------------------
+                                  Task BASELINE IMPROVED    COT    OPRO
+                    Date Understanding   16.00%   20.00% 88.00%  88.00%
+       Logical Deduction Three Objects   86.00%   86.00% 92.00% 100.00%
+Tracking Shuffled Objects Five Objects   80.00%   86.00% 86.00% 100.00%
+                               OVERALL   60.67%   64.00% 88.67%  95.56%
+
+IMPROVEMENTS OVER BASELINE
+------------------------------------------------------------
+
+IMPROVED:
+  Accuracy: 64.00%
+  Absolute Improvement: +3.33%
+  Relative Improvement: +5.5%
+
+COT:
+  Accuracy: 88.67%
+  Absolute Improvement: +28.00%
+  Relative Improvement: +46.2%
+
+OPRO:
+  Accuracy: 95.56%
+  Absolute Improvement: +34.89%
+  Relative Improvement: +57.5%
+
+
+BEST PROMPTS FROM OPRO
+------------------------------------------------------------
+
+date_understanding:
+  Accuracy: 88.00%
+  Prompt: Read the question carefully. Select the correct option and write it with parentheses.
+
+Q: {question}
+
+Your answer (format: (A) or (B) or (C) etc.):
+A:
+
+logical_deduction_three_objects:
+  Accuracy: 100.00%
+  Prompt: Q: {question}
+
+Choose the correct option. Format your answer with parentheses like (A) or (B) or (C).
+A:
+
+tracking_shuffled_objects_five_objects:
+  Accuracy: 100.00%
+  Prompt: Q: {question}
+
+Choose the correct option. Format your answer with parentheses like (A) or (B) or (C).
+A:

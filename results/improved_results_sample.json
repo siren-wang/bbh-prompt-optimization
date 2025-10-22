@@ -1,0 +1,20 @@
+{
+  "date_understanding": {
+    "accuracy": 0.2,
+    "correct": 10,
+    "total": 50,
+    "prompt_template": "You are an expert at date calculations and temporal reasoning.\n\nYour task: Carefully analyze the given date-related question and compute the correct answer.\n\nInstruction: Read the question carefully, determine what to do, think through the problem, perform the calculation accurately, choose the correct option\n\nQ: {question}\n\nThink through this carefully and provide the correct date.\nA:"
+  },
+  "logical_deduction_three_objects": {
+    "accuracy": 0.86,
+    "correct": 43,
+    "total": 50,
+    "prompt_template": "You are an expert in logical reasoning and deductive analysis.\n\nYour task: Analyze the given statements about objects and their relationships, then determine the correct logical conclusion.\n\nInstruction: Read the question carefully, determine what to do, think through the problem, perform the calculation accurately, choose the correct option\n\nQ: {question}\n\nThink through the logical relationships and select the correct answer.\nA:"
+  },
+  "tracking_shuffled_objects_five_objects": {
+    "accuracy": 0.86,
+    "correct": 43,
+    "total": 50,
+    "prompt_template": "You are an expert at tracking object positions through sequences of operations.\n\nYour task: Track how objects change positions through a series of swaps or movements.\n\nInstruction: Read the question carefully, determine what to do, think through the problem, perform the calculation accurately, choose the correct option\n\nQ: {question}\n\nCarefully track each operation and determine the final answer.\nA:"
+  }
+}
